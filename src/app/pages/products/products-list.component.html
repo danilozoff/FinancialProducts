@@ -1,0 +1,60 @@
+<div class="searchAndAdd">
+    <product-search (searchChange)="onSearchChange($event)"></product-search>
+    <button id="addProduct" type="button" (click)="createProduct()">Agregar</button>
+</div>
+
+<div class="tableWrapper">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Nombre del producto</th>
+                    <th>Descripción</th>
+                    <th>Fecha de liberación</th>
+                    <th>Fecha de reestructuración</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of filteredProducts">
+                    <td>
+                        <img [src]="product.logo" onerror="this.src='/assets/imageNotFound.png'" [alt]="product.logo">
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.date_release | date:'dd-MM-yyyy' }}</td>
+                    <td>{{ product.date_revision | date:'dd-MM-yyyy' }}</td>
+                    <td class="options">
+                        <div class="dropdown">
+                            <button class="three-dots-button">&#8942;</button>
+                            <div class="dropdown-content">
+                              <a (click)="editProduct(product)">Editar</a>
+                              <a (click)="deleteProduct(product)">Eliminar</a>
+                            </div>
+                          </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <div id="tableFoot">
+            <span id="textNumberResult">{{ msgNumbersResult }} </span>
+
+            <select id="selectNumResult" [(ngModel)]="quantitySelected" (change)="onSelectQuantity()">
+                <option *ngFor="let quantity of quantities" [value]="quantity.id">{{ quantity.amount }}</option>
+            </select>
+        </div>
+
+        <products-pagination
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            (pageChange)="onPageChange($event)"
+        ></products-pagination>
+
+    </div>
+</div>
+
+
+<app-modal [show]="showModal" [isDelete]="isDeleteModal" [title]="titleModal" [content]="contentModal" (close)="closeModal()" (confirm)="confirmModal($event)"></app-modal>

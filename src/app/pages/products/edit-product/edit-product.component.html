@@ -1,0 +1,5 @@
+<div *ngIf="editProduct">
+    <app-create-edit-product [product]="editProduct"></app-create-edit-product>
+</div>
+
+<app-modal [show]="showModal" [isDelete]="isDeleteModal" [title]="titleModal" [content]="contentModal" (close)="closeModal()" (confirm)="confirmModal($event)"></app-modal>

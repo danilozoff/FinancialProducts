@@ -1,0 +1,9 @@
+.pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    margin: 0 5px;
+}

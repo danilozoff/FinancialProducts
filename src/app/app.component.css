@@ -1,0 +1,11 @@
+#centerLogo {
+    text-align: center;
+    background-color: #fff;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    padding: 5% 4%;
+}

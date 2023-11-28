@@ -1,0 +1,13 @@
+<div class="modal" [ngClass]="{'open': show}">
+    <div class="modal-overlay" (click)="closeModal()"></div>
+    <div class="modal-content">
+      <div class="modal-body">
+        <h2 *ngIf="title">{{ title }}</h2>
+        <p>{{ content }}</p>
+      </div>
+      <div class="modal-button">
+        <button *ngIf="isDelete" id="modal-button-cancel" (click)="closeModal()">Cancelar</button>
+        <button id="modal-button-confirm" (click)="confirmModal()">Confirmar</button>
+      </div>
+    </div>
+  </div>

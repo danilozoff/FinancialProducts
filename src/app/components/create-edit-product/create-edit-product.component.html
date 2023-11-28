@@ -1,0 +1,77 @@
+<div id="centerForm">
+    <div class="wrapper">
+        <div>
+            <h1 id="title">Formulario de Registro</h1>
+            <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+                <div class="container">
+                    <div class="row">
+                        <div class="id">
+                            <label for="id">ID</label>
+                            <input [ngClass]="{'errorBorder': productMessage['id']}" type="text" id="id" formControlName="id" />
+                            <div *ngIf="productMessage['id']">
+                                <span class="error">{{ productMessage['id'] }}</span>
+                            </div>
+                        </div>
+                        <div class="name">
+                            <label for="nombre">Nombre</label>
+                            <input [ngClass]="{'errorBorder': productMessage['name']}" type="text" id="nombre" formControlName="name" />
+                            <div *ngIf="productMessage['name']">
+                                <span class="error">{{ productMessage['name'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="description">
+                            <label for="descripcion">Descripción</label>
+                            <textarea [ngClass]="{'errorBorder': productMessage['description']}" id="descripcion" formControlName="description"></textarea>
+                            <div *ngIf="productMessage['description']">
+                                <span class="error">{{ productMessage['description'] }}</span>
+                            </div>
+                        </div>
+                        <div class="logo">
+                            <label for="logo">Logo</label>
+                            <input [ngClass]="{'errorBorder': productMessage['logo']}" type="text" id="logo" formControlName="logo" />
+                            <div *ngIf="productMessage['logo']">
+                                <span class="error">{{ productMessage['logo'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="dates">
+                            <label for="fechaLiberacion">Fecha de Liberación</label>
+                            <input 
+                                type="date" 
+                                id="fechaLiberacion" 
+                                [ngClass]="{'errorBorder': productMessage['date_release']}" 
+                                [min]="minDateRelease"
+                                (change)="updateDateRevision($event)"
+                                formControlName="date_release" />
+                            <div *ngIf="productMessage['date_release']">
+                                <span class="error">{{ productMessage['date_release'] }}</span>
+                            </div>
+                        </div>
+                        <div class="dates">
+                            <label for="fechaRevision">Fecha de Revisión</label>
+                            <input 
+                                type="date" 
+                                id="fechaRevision" 
+                                [ngClass]="{'errorBorder': productMessage['date_revision']}" 
+                                formControlName="date_revision" />
+                            <div *ngIf="productMessage['date_revision']">
+                                <span class="error">{{ productMessage['date_revision'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button id="reset" type="reset" (click)="resetFormProduct()">Reiniciar</button>
+                    <button id="submit" type="submit">Enviar</button>
+                  </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<app-modal [show]="showModal" [isDelete]="isDeleteModal" [title]="titleModal" [content]="contentModal" (close)="closeModal()" (confirm)="confirmModal($event)"></app-modal>
