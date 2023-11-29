@@ -209,7 +209,7 @@ describe('ProductsListComponent', () => {
     expect(result).toEqual(5);
   });
 
-  it('should update the view without searchFilter', () => {
+  it('should update the view without search filter', () => {
     const getMsgNumbersResultSpy = spyOn(component, 'getMsgNumbersResult')
     component.currentPage = 1;
     component.itemsPerPage = 5;
@@ -262,7 +262,7 @@ describe('ProductsListComponent', () => {
     expect(getMsgNumbersResultSpy).toHaveBeenCalled();
   });
 
-  it('should update the view with searchFilter', () => {
+  it('should update the view with search filter', () => {
     const getMsgNumbersResultSpy = spyOn(component, 'getMsgNumbersResult')
     component.currentPage = 1;
     component.itemsPerPage = 5;

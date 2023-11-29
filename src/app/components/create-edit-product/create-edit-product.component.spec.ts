@@ -5,7 +5,6 @@ import { ProductsService } from 'src/app/services/products.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentsModule } from '../components.module';
 import { of } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
 import { Product } from 'src/app/interfaces/product.interface';
 import { validateBlanks } from 'src/app/validators/validators';
 import { getYYYYMMDD } from 'src/app/utils/dates';
@@ -111,7 +110,7 @@ describe('CreateEditProductComponent', () => {
     expect(result).toEqual({ idExist: true });
   });
 
-  it('should return null for a non-empty string', async () => {
+  it('should return that it has a field with blank space', async () => {
     component.product = {
       id: '  ',
       name: 'Test Product',
@@ -129,7 +128,7 @@ describe('CreateEditProductComponent', () => {
     expect(result).toEqual({ hasBlancks: true });
   });
 
-  it('should call editProduct and display success modal for existing product', async () => {
+  it('should call editProduct and display success modal for edited product', async () => {
     component.product = {
       id: '100',
       name: 'Test Product',
@@ -156,7 +155,6 @@ describe('CreateEditProductComponent', () => {
     component.productForm.updateValueAndValidity();
 
     component.productForm.setValue(updatedProduct);
-
 
     productServiceSpy.editProduct.and.returnValue(of(updatedProduct));
 
@@ -195,7 +193,7 @@ describe('CreateEditProductComponent', () => {
     expect(component.showModal).toBeTruthy();
   });
 
-  it('should update date_revision when updateDateRevision is called with a valid dateRelease', () => {
+  it('should update date_revision when updateDateRevision method is called with a valid dateRelease', () => {
     const dateRelease = '2023-11-26';
     const expectedDateRevision = '2024-11-26';
 
@@ -205,7 +203,7 @@ describe('CreateEditProductComponent', () => {
     expect(dateRevisionControl?.value).toEqual(expectedDateRevision);
   });
 
-  it('should reset the form when resetForm is called', () => {
+  it('should reset the form when resetFormProduct is called after creating a product', () => {
     const initialFormValue = {
       id: '123',
       name: 'Product Name',
@@ -238,14 +236,6 @@ describe('CreateEditProductComponent', () => {
 
     expect(component.showModal).toBeFalse();
     expect(component.isDeleteModal).toBeFalse();
-  });
-
-  it('should set showModal and isDeleteModal to false when closeModal is called', () => {
-    component.showModal = true;
-
-    component.confirmModal({});
-
-    expect(component.showModal).toBeFalse();
   });
 
   it('should mark all form controls as touched and set productMessage if form is invalid', () => {
