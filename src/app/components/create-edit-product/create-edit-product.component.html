@@ -45,6 +45,7 @@
                                 [ngClass]="{'errorBorder': productMessage['date_release']}" 
                                 [min]="minDateRelease"
                                 (change)="updateDateRevision($event)"
+                                (keydown)="keyPressDate($event)"
                                 formControlName="date_release" />
                             <div *ngIf="productMessage['date_release']">
                                 <span class="error">{{ productMessage['date_release'] }}</span>

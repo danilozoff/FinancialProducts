@@ -162,6 +162,10 @@ export class CreateEditProductComponent implements OnInit, AfterViewInit {
     }
   }
 
+  keyPressDate(event: any) {
+    event.preventDefault();
+  }
+
   resetFormProduct() {
     this.productForm.reset();
 

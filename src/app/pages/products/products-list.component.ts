@@ -43,12 +43,12 @@ export class ProductsListComponent implements OnInit{
     this.getProducts();
   }
 
-  async getProducts() {
+  async getProducts(isDeleted = false) {
     try {
       const products$ = this._productsService.getProducts();
       this.products = await lastValueFrom(products$);
       this.filteredProducts = this.products;
-      this.updateView();
+      this.updateView(isDeleted);
     } catch (error) {
       this.titleModal = `Error`
       this.contentModal = `Error al recuperar los productos`
@@ -57,7 +57,12 @@ export class ProductsListComponent implements OnInit{
     }
   }
 
-  updateView() {
+  updateView(isDeleted = false) {
+
+    if (isDeleted) {
+      this.currentPage = 1;
+    }
+
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
 
@@ -141,9 +146,12 @@ export class ProductsListComponent implements OnInit{
         await lastValueFrom(product$);
         this.idProductToDelete = '';
 
-        await this.getProducts();
+        await this.getProducts(true);
       } catch (error) {
-        console.log(error);
+        this.titleModal = 'Error'
+        this.contentModal = 'Error al eliminar producto'
+        this.isDeleteModal = false;
+        this.showModal = true;
       }
     }
   }
